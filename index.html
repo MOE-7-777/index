@@ -1,515 +1,174 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#ffe9d4">
-  <title>今日好運研究所｜每日運勢占卜</title>
-  <style>
-    :root {
-      --canvas: #f1f8e9;
-      --paper: #ffffff;
-      --powder: #dcedc8;
-      --powder-soft: #e8f5e9;
-      --sky: #aed581;
-      --sky-soft: #e8f5e9;
-      --indigo: #689f38;
-      --indigo-soft: #dcedc8;
-      --primary: #558b2f;
-      --primary-dark: #33691e;
-      --primary-soft: #dcedc8;
-      --green: #558b2f;
-      --green-soft: #e8f5e9;
-      --amber: #b86e00;
-      --amber-soft: #fff3d6;
-      --red: #c2415d;
-      --red-soft: #ffe8ed;
-      --ink: #33691e;
-      --soft-ink: #4f6f3a;
-      --muted: #668052;
-      --line: #aed581;
-      --glass: rgba(255,255,255,.84);
-      --shadow: 0 22px 60px rgba(85,139,47,.16);
-      --shadow-soft: 0 12px 28px rgba(51,105,30,.10);
-      --radius-xl: 34px;
-      --radius-lg: 24px;
-      --radius-md: 18px;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f5f1e8">
+<title>黃亭瑄｜個人簡介</title>
+<style>
+:root{--bg:#f5f1e8;--paper:#fffdf8;--ink:#282a27;--muted:#6e716a;--line:#d9d4c8;--red:#9b4639;--red2:#71372f;--gold:#b18b4b;--sage:#667568;--serif:Georgia,"Noto Serif TC","PMingLiU",serif;--sans:"Microsoft JhengHei","Noto Sans TC",system-ui,sans-serif}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.8}
+a{color:inherit}
+a:focus-visible,button:focus-visible{outline:3px solid var(--gold);outline-offset:4px}
+.wrap{width:min(1120px,calc(100% - 48px));margin:auto}
+header{border-bottom:1px solid var(--line);background:rgba(255,253,248,.9)}
+.nav{height:76px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.brand{font-family:var(--serif);font-size:20px;font-weight:700;letter-spacing:.06em;text-decoration:none}
+nav{display:flex;gap:26px}
+nav a{text-decoration:none;font-size:14px;color:var(--muted)}
+nav a:hover{color:var(--red)}
+.hero{padding:82px 0 74px;display:grid;grid-template-columns:1.25fr .75fr;gap:64px;align-items:center}
+.kicker{font-size:12px;letter-spacing:.2em;color:var(--red);font-weight:800;text-transform:uppercase}
+h1{font-family:var(--serif);font-size:clamp(48px,7vw,82px);line-height:1.12;letter-spacing:.05em;margin:18px 0 15px;font-weight:600}
+.subtitle{font-size:18px;color:var(--muted);letter-spacing:.08em}
+.intro{max-width:610px;margin:28px 0 0;color:#4f524c}
+.hero-art{min-height:330px;position:relative;display:grid;place-items:center}
+.seal{width:245px;height:245px;border:1px solid var(--gold);border-radius:50%;display:grid;place-items:center;position:relative;color:var(--red);font-family:var(--serif);font-size:48px;letter-spacing:.16em;background:radial-gradient(circle,#fffdf8 0 57%,#f0e9d9 58% 59%,transparent 60%)}
+.seal:before,.seal:after{content:"";position:absolute;border:1px solid #b18b4b66;border-radius:50%;inset:17px}
+.seal:after{inset:-16px;border-style:dashed}
+.seal small{display:block;font-family:var(--sans);font-size:10px;letter-spacing:.24em;color:var(--muted);margin-top:-64px}
+.stamp{position:absolute;right:3%;bottom:7%;background:var(--red);color:#fffdf8;padding:12px 15px;font-family:var(--serif);font-size:14px;transform:rotate(-7deg);box-shadow:5px 5px 0 #9b463922}
+.section{padding:66px 0;border-top:1px solid var(--line)}
+.section-head{display:grid;grid-template-columns:190px 1fr;gap:32px;margin-bottom:30px;align-items:start}
+.eyebrow{font-size:12px;letter-spacing:.18em;color:var(--red);font-weight:800}
+h2{font-family:var(--serif);font-size:32px;line-height:1.3;margin:6px 0}
+.section-copy{max-width:720px;color:#51554e;margin:0}
+.profile-grid{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.profile-item{padding:23px 24px 23px 0;border-right:1px solid var(--line)}
+.profile-item+ .profile-item{padding-left:24px}
+.profile-item:last-child{border:0}
+.label{font-size:12px;color:var(--muted);letter-spacing:.12em}
+.value{font-family:var(--serif);font-size:22px;margin-top:6px}
+.note{font-size:13px;color:var(--muted);margin-top:20px}
 
-    * { box-sizing: border-box; }
-
-    body {
-      margin: 0;
-      min-height: 100vh;
-      color: var(--ink);
-      font-family: "Microsoft JhengHei", "Noto Sans TC", system-ui, sans-serif;
-      background:
-        radial-gradient(circle at 10% 8%, rgba(85,139,47,.12), transparent 30%),
-        radial-gradient(circle at 90% 12%, rgba(174,213,129,.32), transparent 28%),
-        radial-gradient(circle at 50% 96%, rgba(104,159,56,.16), transparent 34%),
-        linear-gradient(135deg, #dcedc8 0%, #f1f8e9 50%, #e8f5e9 100%);
-      background-attachment: fixed;
-    }
-
-    input, select, textarea { max-width: 100%; }
-
-    button { font: inherit; }
-    button:focus-visible, a:focus-visible {
-      outline: 3px solid rgba(85,139,47,.38);
-      outline-offset: 3px;
-    }
-
-    .container { width: min(1120px, calc(100% - 32px)); margin: 0 auto; padding: 26px 0 56px; }
-    .topbar {
-      display: flex; align-items: center; justify-content: space-between; gap: 16px;
-      padding: 13px 18px; margin-bottom: 24px; border-radius: 999px;
-      background: var(--glass); border: 1px solid rgba(255,255,255,.9);
-      box-shadow: var(--shadow-soft); backdrop-filter: blur(16px);
-    }
-    .brand { display: flex; align-items: center; gap: 12px; font-weight: 950; letter-spacing: .03em; }
-    .logo {
-      width: 43px; height: 43px; display: grid; place-items: center; flex: 0 0 auto;
-      color: white; border-radius: 16px; font-size: 22px;
-      background: linear-gradient(135deg, #8bc34a, #558b2f);
-      box-shadow: 0 12px 24px rgba(85,139,47,.25);
-    }
-    .top-note { color: var(--muted); font-size: 13px; font-weight: 800; }
-
-    .hero { display: grid; grid-template-columns: 1.08fr .92fr; gap: 22px; margin-bottom: 22px; }
-    .hero-card {
-      min-height: 390px; position: relative; overflow: hidden; padding: clamp(25px, 5vw, 48px);
-      border-radius: var(--radius-xl); border: 1px solid rgba(255,255,255,.9);
-      background: linear-gradient(135deg, rgba(255,255,255,.95), rgba(255,255,255,.72)),
-                  linear-gradient(135deg, rgba(139,195,74,.18), rgba(174,213,129,.22), rgba(85,139,47,.12));
-      box-shadow: var(--shadow);
-    }
-    .hero-card::before {
-      content: ""; position: absolute; width: 190px; height: 190px; right: -62px; top: -62px;
-      border-radius: 50%; background: linear-gradient(135deg, #aed581, #8bc34a); opacity: .72;
-    }
-    .hero-card::after {
-      content: ""; position: absolute; width: 140px; height: 140px; left: -48px; bottom: -48px;
-      border-radius: 50%; background: linear-gradient(135deg, #dcedc8, #aed581); opacity: .8;
-    }
-    .hero-content { position: relative; z-index: 1; max-width: 620px; }
-    .eyebrow {
-      display: inline-flex; padding: 9px 14px; margin-bottom: 18px; border-radius: 999px;
-      color: var(--primary); background: var(--sky-soft); font-size: 13px; font-weight: 950; letter-spacing: .06em;
-    }
-    h1 { margin: 0; font-size: clamp(36px, 5.5vw, 60px); line-height: 1.12; letter-spacing: .02em; }
-    .accent { color: var(--primary); }
-    .hero p { color: var(--soft-ink); font-size: 17px; line-height: 1.9; margin: 17px 0 0; }
-    .actions { display: flex; flex-wrap: wrap; gap: 11px; margin-top: 24px; }
-    .btn {
-      min-height: 48px; display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-      padding: 13px 19px; border: 0; border-radius: 17px; cursor: pointer;
-      color: white; font-weight: 950; text-decoration: none;
-      background: #8bc34a;
-      box-shadow: 0 14px 26px rgba(85,139,47,.23); transition: transform .18s ease, filter .18s ease;
-    }
-    .btn:hover { transform: translateY(-2px); filter: brightness(1.05); }
-    .btn:disabled { cursor: not-allowed; opacity: .55; transform: none; }
-    .btn.light {
-      color: var(--primary); background: rgba(255,255,255,.9);
-      border: 1px solid rgba(85,139,47,.2); box-shadow: var(--shadow-soft);
-    }
-    .side-stack { display: grid; gap: 15px; }
-    .side-card {
-      padding: 22px; border-radius: var(--radius-xl); border: 1px solid rgba(255,255,255,.9);
-      background: rgba(255,255,255,.82); box-shadow: var(--shadow-soft); backdrop-filter: blur(14px);
-    }
-    .date-card { min-height: 165px; background: linear-gradient(135deg, #dcedc8, rgba(255,255,255,.86)); }
-    .date-row { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
-    .date-card h2, .side-card h2 { margin: 0; font-size: 22px; }
-    .date-big { color: var(--primary); font-size: 38px; font-weight: 950; letter-spacing: .03em; }
-    .side-card p { color: var(--soft-ink); line-height: 1.75; margin: 8px 0 0; }
-    .sun-orb {
-      width: 72px; height: 72px; flex: 0 0 auto; border-radius: 50%;
-      background: radial-gradient(circle at 35% 35%, #fff7ad, #facc15 58%, #fb923c);
-      box-shadow: 0 14px 30px rgba(139,195,74,.25);
-    }
-    .tip-row { display: grid; grid-template-columns: 42px 1fr; align-items: center; gap: 12px; margin-top: 14px; }
-    .tip-icon { width: 42px; height: 42px; display: grid; place-items: center; border-radius: 15px; background: var(--indigo-soft); font-size: 21px; }
-    .tip-row b { display: block; font-size: 14px; }
-    .tip-row span { color: var(--muted); font-size: 13px; }
-
-    .section {
-      margin-bottom: 22px; padding: 25px; border-radius: var(--radius-xl);
-      background: var(--glass); border: 1px solid rgba(255,255,255,.9);
-      box-shadow: var(--shadow-soft); backdrop-filter: blur(15px);
-    }
-    .section-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 14px; margin-bottom: 18px; }
-    .section h2 { margin: 0; font-size: 27px; letter-spacing: .02em; }
-    .section-desc { color: var(--soft-ink); margin: 7px 0 0; line-height: 1.75; }
-
-    .fortune-layout { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(280px, .95fr); gap: 17px; }
-    .draw-panel, .result-panel {
-      min-width: 0; padding: 22px; border-radius: var(--radius-lg);
-      background: rgba(255,255,255,.88); border: 1px solid rgba(255,255,255,.95);
-      box-shadow: var(--shadow-soft);
-    }
-    .draw-panel { display: flex; flex-direction: column; justify-content: space-between; gap: 18px; }
-    /* 抽籤時讓籤球與抽籤卡片短暫左右搖晃。 */
-    @keyframes fortune-shake {
-      0%, 100% { transform: translateX(0) rotate(0); }
-      15% { transform: translateX(-7px) rotate(-5deg); }
-      30% { transform: translateX(7px) rotate(5deg); }
-      45% { transform: translateX(-6px) rotate(-4deg); }
-      60% { transform: translateX(6px) rotate(4deg); }
-      75% { transform: translateX(-3px) rotate(-2deg); }
-      90% { transform: translateX(3px) rotate(2deg); }
-    }
-    .draw-panel.is-shaking { animation: fortune-shake .82s ease-in-out; }
-    .draw-panel.is-shaking .crystal { animation: fortune-shake .82s ease-in-out; }
-
-    .draw-intro { display: flex; align-items: center; gap: 14px; }
-    .crystal { width: 58px; height: 58px; flex: 0 0 auto; display: grid; place-items: center; border-radius: 20px; background: var(--powder-soft); font-size: 30px; }
-    .draw-intro h3 { margin: 0; font-size: 19px; }
-    .draw-intro p { margin: 5px 0 0; color: var(--muted); font-size: 14px; line-height: 1.6; }
-    .prompt-box { padding: 16px; border-radius: 18px; background: var(--sky-soft); color: var(--primary-dark); font-weight: 800; line-height: 1.75; }
-    .draw-actions { display: flex; flex-wrap: wrap; gap: 10px; }
-    .draw-actions .btn { flex: 1 1 170px; }
-    .result-panel {
-      position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: center;
-      min-height: 270px; text-align: center;
-      background: linear-gradient(145deg, rgba(255,255,255,.96), rgba(232,245,233,.88));
-    }
-    .result-panel::before { content: "✦"; position: absolute; top: 13px; right: 19px; color: #8bc34a; font-size: 27px; }
-    .result-panel::after { content: "✧"; position: absolute; bottom: 9px; left: 18px; color: #aed581; font-size: 30px; }
-    .result-placeholder { color: var(--muted); }
-    .result-emoji { font-size: 42px; line-height: 1.2; }
-    .result-label { margin-top: 7px; color: var(--muted); font-size: 13px; font-weight: 900; letter-spacing: .12em; }
-    .fortune-name { margin: 5px 0 7px; color: var(--primary); font-size: clamp(42px, 7vw, 62px); line-height: 1.15; font-weight: 1000; }
-    .fortune-sub { color: var(--soft-ink); line-height: 1.7; }
-    .quote {
-      margin: 16px 0 0; padding: 14px 16px; border-radius: 18px;
-      color: var(--primary-dark); background: rgba(255,255,255,.82);
-      border: 1px solid rgba(85,139,47,.12); font-weight: 850; line-height: 1.8;
-    }
-    .quote small { display: block; margin-bottom: 4px; color: var(--indigo); font-size: 11px; letter-spacing: .12em; }
-    .result-meta { margin-top: 12px; color: var(--muted); font-size: 12px; }
-
-    .fortune-guide { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
-    .guide-card {
-      min-height: 112px; padding: 15px; border-radius: 20px;
-      background: rgba(255,255,255,.88); border: 1px solid rgba(174,213,129,.55);
-    }
-    .guide-card strong { display: block; font-size: 19px; margin-bottom: 5px; }
-    .guide-card span { color: var(--muted); font-size: 13px; line-height: 1.6; }
-    .tone-good { color: var(--green); }
-    .tone-mid { color: var(--primary); }
-    .tone-warn { color: var(--amber); }
-    .tone-bad { color: var(--red); }
-
-    .bottom-note {
-      display: flex; align-items: flex-start; gap: 12px; padding: 16px 18px;
-      border-radius: 19px; background: var(--amber-soft); color: #805000; line-height: 1.75; font-size: 14px;
-    }
-    .bottom-note strong { white-space: nowrap; }
-    footer { text-align: center; color: var(--muted); font-size: 12px; padding: 5px 10px 0; }
-
-    @media (max-width: 900px) {
-      .hero, .fortune-layout { grid-template-columns: 1fr; }
-      .hero-card { min-height: 320px; }
-      .fortune-guide { grid-template-columns: repeat(2, 1fr); }
-    }
-    @media (max-width: 620px) {
-      .container { width: min(100% - 22px, 1120px); padding-top: 16px; }
-      .topbar { border-radius: 23px; padding: 12px 14px; }
-      .top-note { display: none; }
-      .hero-card { min-height: auto; border-radius: 27px; padding: 27px 22px; }
-      .hero p { font-size: 15px; }
-      .actions .btn { width: 100%; }
-      .section { padding: 17px; border-radius: 26px; }
-      .section h2 { font-size: 23px; }
-      .section-head { align-items: flex-start; flex-direction: column; }
-      .draw-panel, .result-panel { padding: 17px; }
-      .fortune-guide { grid-template-columns: 1fr 1fr; gap: 9px; }
-      .guide-card { min-height: 100px; padding: 12px; }
-      .draw-actions { flex-direction: column; }
-      .draw-actions .btn { width: 100%; }
-      .bottom-note { display: block; }
-      .bottom-note strong { display: block; margin-bottom: 3px; }
-    }
-    @media (max-width: 380px) {
-      .container { width: calc(100% - 16px); }
-      .brand { font-size: 14px; }
-      .logo { width: 38px; height: 38px; border-radius: 14px; }
-      h1 { font-size: 34px; }
-      .fortune-guide { grid-template-columns: 1fr; }
-      .date-big { font-size: 32px; }
-    }
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; animation: none !important; }
-    }
-  </style>
+.experience-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.experience-card{background:var(--paper);border:1px solid var(--line);padding:25px 26px;position:relative}
+.experience-card:before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--red)}
+.experience-no{font-size:12px;letter-spacing:.16em;color:var(--gold);font-weight:800}
+.experience-card h3{font-family:var(--serif);font-size:23px;margin:9px 0 8px}
+.experience-card p{margin:0;color:#555950}
+.study{display:grid;grid-template-columns:1fr 1fr;gap:34px}
+.study article{border-left:3px solid var(--gold);padding:4px 0 4px 22px}
+.study h3{font-family:var(--serif);font-size:22px;margin:0 0 8px}
+.study p{margin:0;color:#555950}
+.quote{background:#eae4d6;padding:38px 42px;margin-top:36px;border-left:4px solid var(--red);font-family:var(--serif);font-size:22px;line-height:1.8}
+.links{display:flex;flex-wrap:wrap;gap:12px;margin-top:24px}
+.link{display:inline-flex;align-items:center;min-height:46px;padding:9px 17px;border:1px solid var(--red);color:var(--red);text-decoration:none;font-weight:700;font-size:14px}
+.link:hover{background:var(--red);color:#fff}
+footer{padding:28px 0 42px;color:var(--muted);font-size:13px}
+footer .foot{display:flex;justify-content:space-between;gap:20px;border-top:1px solid var(--line);padding-top:18px}
+.source{margin-top:14px;line-height:1.9}
+.source a{color:var(--red)}
+@media(max-width:900px){.profile-grid{grid-template-columns:repeat(2,1fr)}.profile-item:nth-child(2){border-right:0}.profile-item:nth-child(3){padding-left:0}}
+@media(max-width:760px){
+ .wrap{width:min(100% - 32px,600px)}.nav{height:auto;min-height:68px;align-items:flex-start;padding:17px 0;flex-direction:column;gap:8px}
+ nav{gap:17px;flex-wrap:wrap}nav a{font-size:13px}
+ .hero{padding:54px 0 46px;grid-template-columns:1fr;gap:18px}.hero-art{min-height:250px}.seal{width:190px;height:190px;font-size:38px}
+ .section{padding:48px 0}.section-head{grid-template-columns:1fr;gap:9px}.profile-grid{grid-template-columns:1fr}.experience-grid{grid-template-columns:1fr}
+ .profile-item,.profile-item+.profile-item{padding:15px 0;border-right:0;border-bottom:1px solid var(--line)}
+ .profile-item:last-child{border-bottom:0}.study{grid-template-columns:1fr;gap:24px}
+ .quote{padding:24px;font-size:19px}footer .foot{flex-direction:column}
+}
+@media(max-width:380px){.wrap{width:calc(100% - 26px)}h1{font-size:46px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
 </head>
 <body>
-  <main class="container">
-    <nav class="topbar" aria-label="網站識別">
-      <div class="brand"><div class="logo" aria-hidden="true">☀</div><span>今日好運研究所</span></div>
-      <div class="top-note">把今天，過成值得期待的一天 ✨</div>
-    </nav>
+<header>
+ <div class="wrap nav">
+  <a class="brand" href="#top">黃亭瑄 <span aria-hidden="true">／</span> 個人頁</a>
+  <nav aria-label="主要導覽">
+   <a href="#about">關於我</a><a href="#experience">活動經歷</a><a href="#study">學習領域</a><a href="#links">相關連結</a>
+  </nav>
+ </div>
+</header>
+<main id="top">
+ <section class="wrap hero" aria-labelledby="main-title">
+  <div>
+   <div class="kicker">PERSONAL PROFILE · HISTORY</div>
+   <h1 id="main-title">黃亭瑄</h1>
+   <div class="subtitle">國立臺灣師範大學・歷史學系・117級</div>
+   <p class="intro">就讀國立臺灣師範大學歷史學系 117 級，喜歡畫圖，也樂於投入系上活動與團隊合作。從系學會行政工作到啦啦隊活動籌辦，在不同角色中累積溝通、協調與執行經驗。</p>
+  </div>
+  <div class="hero-art" aria-label="以古籍印章與圓形紋樣構成的歷史主題裝飾">
+   <div class="seal">史<small>HISTORY · MEMORY</small></div>
+   <div class="stamp">求知・探究</div>
+  </div>
+ </section>
 
-    <section class="hero" aria-labelledby="page-title">
-      <div class="hero-card">
-        <div class="hero-content">
-          <div class="eyebrow">✦ DAILY FORTUNE · 每日一籤</div>
-          <h1 id="page-title">今天的你，<br><span class="accent">會遇見什麼好事？</span></h1>
-          <p>靜下心來，為今天抽一張專屬運勢籤。無論抽到哪一種結果，都把它當作一份溫柔提醒，帶著好心情迎接每個可能。</p>
-          <div class="actions">
-            <a class="btn" href="#draw-area">🔮 開始今日占卜</a>
-            <a class="btn light" href="#fortune-guide">查看運勢說明</a>
-          </div>
-        </div>
-      </div>
+ <section class="section" id="about">
+  <div class="wrap">
+   <div class="section-head">
+    <div><div class="eyebrow">01 / ABOUT</div><h2>關於我</h2></div>
+    <p class="section-copy">目前可確認的個人資訊以你在本次對話提供的內容為準。為避免與網路上同名人士混淆，這份頁面不會擅自加入未經本人確認的經歷、獎項、照片、聯絡方式或社群帳號。</p>
+   </div>
+   <div class="profile-grid">
+    <div class="profile-item"><div class="label">姓名 NAME</div><div class="value">黃亭瑄</div></div>
+    <div class="profile-item"><div class="label">學校 UNIVERSITY</div><div class="value">國立臺灣師範大學</div></div>
+    <div class="profile-item"><div class="label">科系 DEPARTMENT</div><div class="value">歷史學系</div></div>
+    <div class="profile-item"><div class="label">年級 YEAR</div><div class="value">117級</div></div>
+    <div class="profile-item"><div class="label">興趣 INTEREST</div><div class="value">畫圖・視覺創作</div></div>
+   </div>
+   <p class="note">年級與個人經歷依本人提供的資料呈現。</p>
+  </div>
+ </section>
 
-      <aside class="side-stack">
-        <div class="side-card date-card">
-          <div class="date-row">
-            <div>
-              <h2>今日日期</h2>
-              <div class="date-big" id="today-date">載入中</div>
-              <p id="today-weekday">準備迎接嶄新的一天</p>
-            </div>
-            <div class="sun-orb" aria-hidden="true"></div>
-          </div>
-        </div>
-        <div class="side-card">
-          <h2>今日小提醒</h2>
-          <p>運勢是趣味參考，不是命運的判決。真正能讓一天發光的，還有你的選擇與行動。</p>
-          <div class="tip-row"><div class="tip-icon">🌱</div><div><b>給自己一點耐心</b><span>慢慢來，也是一種前進。</span></div></div>
-          <div class="tip-row"><div class="tip-icon">💛</div><div><b>記得肯定自己</b><span>每一個小小努力都值得。</span></div></div>
-        </div>
-      </aside>
-    </section>
 
-    <section class="section" id="draw-area" aria-labelledby="draw-title">
-      <div class="section-head">
-        <div>
-          <h2 id="draw-title">✨ 抽出你的今日運勢</h2>
-          <p class="section-desc">深呼吸，想一想今天最期待的事，再按下按鈕揭曉你的專屬籤運。</p>
-        </div>
-      </div>
+ <section class="section" id="experience">
+  <div class="wrap">
+   <div class="section-head">
+    <div><div class="eyebrow">02 / EXPERIENCE</div><h2>活動經歷</h2></div>
+    <p class="section-copy">在系上活動中嘗試不同的角色，從行政事務、資源統整到大型活動的規劃協調，累積團隊合作與活動執行經驗。</p>
+   </div>
+   <div class="experience-grid">
+    <article class="experience-card">
+     <div class="experience-no">STUDENT ASSOCIATION</div>
+     <h3>歷史系學會總務股長</h3>
+     <p>曾任系學會總務股長，參與系學會總務相關事務，累積行政參與與團隊協作經驗。</p>
+    </article>
+    <article class="experience-card">
+     <div class="experience-no">CHEERLEADING TEAM</div>
+     <h3>系啦啦隊總籌</h3>
+     <p>曾任系啦啦隊總籌，參與系啦啦隊活動的籌備與統籌，展現投入團隊活動的熱忱。</p>
+    </article>
+   </div>
+  </div>
+ </section>
 
-      <div class="fortune-layout">
-        <div class="draw-panel">
-          <div class="draw-intro">
-            <div class="crystal" aria-hidden="true">🔮</div>
-            <div><h3>每日幸運籤</h3><p>每天都能重新開始，讓一句好話陪你前進。</p></div>
-          </div>
-          <div class="prompt-box">「不必預知所有答案，只要帶著勇氣走好眼前這一步。」<br>準備好了嗎？今天的訊息正等著你。</div>
-          <div class="draw-actions">
-            <button class="btn" id="draw-btn" type="button">🌟 開始抽今日運勢</button>
-            <button class="btn light" id="reset-btn" type="button">↻ 重新開始</button>
-          </div>
-        </div>
+ <section class="section" id="study">
+  <div class="wrap">
+   <div class="section-head">
+    <div><div class="eyebrow">03 / STUDY</div><h2>學習領域</h2></div>
+    <p class="section-copy">以下介紹的是臺師大歷史學系公開說明的學科與課程方向，作為系所背景資訊；不代表已確認黃亭瑄個人選修或研究的領域。</p>
+   </div>
+   <div class="study">
+    <article><h3>以史料理解過去</h3><p>歷史學以人類社會為研究對象，重視史料證據，透過分析與詮釋，理解過去事件的脈絡、原因及意義。</p></article>
+    <article><h3>多元的歷史視野</h3><p>系所課程涵蓋中國史、世界史、臺灣史與應用史等學群，提供不同時空與議題的學習視角。</p></article>
+   </div>
+   <div class="quote">「理解過去，是為了更有脈絡地思考現在。」</div>
+  </div>
+ </section>
 
-        <div class="result-panel" id="result-panel" aria-live="polite" aria-atomic="true">
-          <div class="result-placeholder" id="placeholder">
-            <div class="result-emoji">🎴</div>
-            <div class="result-label">YOUR DAILY FORTUNE</div>
-            <h3 style="margin:8px 0;color:#558b2f;font-size:25px;">等待你的今日籤運</h3>
-            <div>按下左側按鈕，揭開今天的小驚喜！</div>
-          </div>
-          <div id="result-content" hidden>
-            <div class="result-emoji" id="result-emoji">🌸</div>
-            <div class="result-label">YOUR DAILY FORTUNE</div>
-            <div class="fortune-name" id="fortune-name">大吉</div>
-            <div class="fortune-sub" id="fortune-desc"></div>
-            <blockquote class="quote"><small>✦ 今日心靈雞湯 ✦</small><span id="fortune-quote"></span></blockquote>
-            <div class="result-meta" id="result-meta"></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="fortune-guide" aria-labelledby="guide-title">
-      <div class="section-head">
-        <div>
-          <h2 id="guide-title">🌈 七種籤運小指南</h2>
-          <p class="section-desc">每一種運勢都有它的提醒，順境時珍惜，遇到挑戰時也別忘了照顧自己。</p>
-        </div>
-      </div>
-      <div class="fortune-guide">
-        <div class="guide-card"><strong class="tone-good">🌟 大吉</strong><span>好事值得期待，適合把握機會、勇敢行動。</span></div>
-        <div class="guide-card"><strong class="tone-good">🍀 中吉</strong><span>進展順利，穩穩前進就能累積成果。</span></div>
-        <div class="guide-card"><strong class="tone-good">🌼 吉</strong><span>平順中帶著小確幸，留意身邊的美好。</span></div>
-        <div class="guide-card"><strong class="tone-mid">🫧 小吉</strong><span>小小的好運正在發芽，保持開放心情。</span></div>
-        <div class="guide-card"><strong class="tone-warn">🌤️ 小凶</strong><span>事情或許不如預期，放慢腳步、仔細確認。</span></div>
-        <div class="guide-card"><strong class="tone-warn">🌧️ 凶</strong><span>適合整理步調與心情，重要決定不妨多想一下。</span></div>
-        <div class="guide-card"><strong class="tone-bad">🌙 大凶</strong><span>把今天當作休整日，先照顧好自己再出發。</span></div>
-      </div>
-    </section>
-
-    <div class="bottom-note">
-      <strong>📌 溫柔提醒</strong>
-      <span>本工具為娛樂與自我鼓勵用途，結果由程式隨機產生，並不具預測未來或保證事件發生的能力。無論籤運如何，你都可以透過自己的選擇，讓今天多一點美好。</span>
-    </div>
-    <footer>今日好運研究所 · 單一 HTML 離線版 · 不蒐集、不上傳任何個人資料</footer>
-  </main>
-
-  <script>
-    "use strict";
-
-    // 今日日期依使用者裝置的本地時間顯示，不連線取得外部資料。
-    (function showLocalDate() {
-      const now = new Date();
-      const dateText = new Intl.DateTimeFormat("zh-TW", {
-        year: "numeric", month: "2-digit", day: "2-digit"
-      }).format(now);
-      const weekdayText = new Intl.DateTimeFormat("zh-TW", { weekday: "long" }).format(now);
-      document.getElementById("today-date").textContent = dateText;
-      document.getElementById("today-weekday").textContent = weekdayText + " · 願今天有好事發生";
-    })();
-
-    // 七種運勢與對應鼓勵文字；採等機率抽取，避免負面籤運被刻意放大。
-    const fortunes = [
-      {
-        name: "小吉", emoji: "🫧", tone: "tone-mid",
-        desc: "平凡的一天裡藏著小小驚喜。保持好奇，留意那些值得微笑的瞬間。",
-        quotes: [
-          "不用一次走很遠，只要今天比昨天多一點點勇敢。",
-          "生活的美好，常常藏在你願意停下來欣賞的細節裡。",
-          "小小的進步也算數，請為正在努力的自己拍拍手。"
-        ]
-      },
-      {
-        name: "吉", emoji: "🌼", tone: "tone-good",
-        desc: "整體步調平穩，適合把握眼前的機會，也別忘了分享你的好心情。",
-        quotes: [
-          "你不需要成為別人眼中的誰，做好自己就很了不起。",
-          "把注意力放在能改變的事情上，心就會慢慢變得踏實。",
-          "善意不一定立刻開花，但它會讓世界多一點溫度。"
-        ]
-      },
-      {
-        name: "中吉", emoji: "🍀", tone: "tone-good",
-        desc: "努力逐漸累積成成果。相信自己的準備，踏實前進就會看見進展。",
-        quotes: [
-          "每一次認真都不會白費，它正在成為未來的底氣。",
-          "你可以走得慢一點，但請不要忘記自己正在前進。",
-          "把大目標拆成小步驟，今天完成一小步就很棒。"
-        ]
-      },
-      {
-        name: "大吉", emoji: "🌟", tone: "tone-good",
-        desc: "充滿活力與希望的一天！適合主動出擊，讓好點子有機會成真。",
-        quotes: [
-          "相信自己值得更好的，也勇敢為想要的生活踏出一步。",
-          "機會來臨時，願你有勇氣伸手，也有智慧好好把握。",
-          "你的光不必與任何人比較，照亮自己的路就足夠。"
-        ]
-      },
-      {
-        name: "小凶", emoji: "🌤️", tone: "tone-warn",
-        desc: "可能有些小插曲，先別急著下結論。放慢速度、確認細節，就能更安心。",
-        quotes: [
-          "遇到不順的時候，先深呼吸；暫停一下，也是前進的一部分。",
-          "今天不必事事完美，願意調整方向就是一種能力。",
-          "一時的卡關不代表走錯路，給自己一點時間整理思緒。"
-        ]
-      },
-      {
-        name: "凶", emoji: "🌧️", tone: "tone-warn",
-        desc: "今天適合保留彈性，重要事情多確認一次。照顧好節奏，比急著完成更重要。",
-        quotes: [
-          "你可以暫時沒有答案，先好好照顧自己就已經很重要。",
-          "不是每一天都要閃閃發亮，平安踏實地度過也值得肯定。",
-          "當事情不如預期，請記得你仍然擁有重新整理與選擇的力量。"
-        ]
-      },
-      {
-        name: "大凶", emoji: "🌙", tone: "tone-bad",
-        desc: "把今天當成休息與整理的一天。先照顧身心、降低不必要的壓力，明天再慢慢出發。",
-        quotes: [
-          "休息不是退步，而是為下一段路留一點力氣。",
-          "即使今天有些不容易，你依然值得被善待，也值得給自己鼓勵。",
-          "請把對別人的溫柔，也分一些給自己；你不必獨自扛起所有事。"
-        ]
-      }
-    ];
-
-    const drawPanel = document.querySelector(".draw-panel");
-    const drawButton = document.getElementById("draw-btn");
-    const resetButton = document.getElementById("reset-btn");
-    const placeholder = document.getElementById("placeholder");
-    const resultContent = document.getElementById("result-content");
-    const fortuneName = document.getElementById("fortune-name");
-    const fortuneEmoji = document.getElementById("result-emoji");
-    const fortuneDesc = document.getElementById("fortune-desc");
-    const fortuneQuote = document.getElementById("fortune-quote");
-    const resultMeta = document.getElementById("result-meta");
-
-    let lastFortuneIndex = -1;
-    let isDrawing = false;
-
-    function randomIndex(max) {
-      // 使用瀏覽器加密亂數；若環境不支援則退回 Math.random。
-      if (window.crypto && typeof window.crypto.getRandomValues === "function") {
-        const values = new Uint32Array(1);
-        const limit = Math.floor(0x100000000 / max) * max;
-        let value;
-        do {
-          window.crypto.getRandomValues(values);
-          value = values[0];
-        } while (value >= limit);
-        return value % max;
-      }
-      return Math.floor(Math.random() * max);
-    }
-
-    function drawFortune() {
-      if (isDrawing) return;
-      isDrawing = true;
-      drawButton.disabled = true;
-      drawButton.textContent = "✨ 正在為你揭曉…";
-      // 每次點擊先重設動畫 class，確保連續抽籤也能重新播放。
-      drawPanel.classList.remove("is-shaking");
-      void drawPanel.offsetWidth;
-      drawPanel.classList.add("is-shaking");
-
-      // 使用短暫揭曉效果，並鎖定按鈕避免連續點擊造成重複執行。
-      window.setTimeout(() => {
-        let index = randomIndex(fortunes.length);
-        if (fortunes.length > 1 && index === lastFortuneIndex) {
-          index = (index + 1 + randomIndex(fortunes.length - 1)) % fortunes.length;
-        }
-        lastFortuneIndex = index;
-        const chosen = fortunes[index];
-        const quote = chosen.quotes[randomIndex(chosen.quotes.length)];
-
-        placeholder.hidden = true;
-        resultContent.hidden = false;
-        fortuneEmoji.textContent = chosen.emoji;
-        fortuneName.textContent = chosen.name;
-        fortuneName.className = "fortune-name " + chosen.tone;
-        fortuneDesc.textContent = chosen.desc;
-        fortuneQuote.textContent = "「" + quote + "」";
-        resultMeta.textContent = "抽籤時間：" + new Intl.DateTimeFormat("zh-TW", {
-          hour: "2-digit", minute: "2-digit", second: "2-digit"
-        }).format(new Date());
-
-        drawButton.disabled = false;
-        drawButton.textContent = "🔮 再抽一次";
-        isDrawing = false;
-      }, 820);
-    }
-
-    function resetFortune() {
-      if (isDrawing) return;
-      lastFortuneIndex = -1;
-      drawPanel.classList.remove("is-shaking");
-      resultContent.hidden = true;
-      placeholder.hidden = false;
-      drawButton.disabled = false;
-      drawButton.textContent = "🌟 開始抽今日運勢";
-      document.getElementById("result-panel").scrollIntoView({ behavior: "smooth", block: "nearest" });
-      drawButton.focus();
-    }
-
-    drawButton.addEventListener("click", drawFortune);
-    resetButton.addEventListener("click", resetFortune);
-  </script>
+ <section class="section" id="links">
+  <div class="wrap">
+   <div class="section-head">
+    <div><div class="eyebrow">04 / LINKS</div><h2>相關連結</h2></div>
+    <p class="section-copy">以下為學校與系所的官方公開資訊，可進一步了解學系課程、學術活動與系所介紹。</p>
+   </div>
+   <div class="links">
+    <a class="link" href="https://www.his.ntnu.edu.tw/" target="_blank" rel="noopener noreferrer">臺師大歷史學系官方網站 ↗</a>
+    <a class="link" href="https://www.ntnu.edu.tw/" target="_blank" rel="noopener noreferrer">國立臺灣師範大學 ↗</a>
+   </div>
+  </div>
+ </section>
+</main>
+<footer>
+ <div class="wrap">
+  <div class="foot"><span>黃亭瑄｜個人簡介</span><span>本頁內容以已確認資訊為限</span></div>
+  <div class="source">系所背景資料來源：<a href="https://www.his.ntnu.edu.tw/index.php/about/" target="_blank" rel="noopener noreferrer">臺師大歷史學系・系所簡介</a>、<a href="https://www.his.ntnu.edu.tw/index.php/course/" target="_blank" rel="noopener noreferrer">課程資訊</a>。<br>個人姓名、學校、科系與「117」為本人於本次對話提供，並非由搜尋結果推定。</div>
+ </div>
+</footer>
 </body>
 </html>
